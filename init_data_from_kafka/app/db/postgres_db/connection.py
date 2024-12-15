@@ -5,6 +5,6 @@ from dotenv import load_dotenv
 
 load_dotenv(verbose=True)
 
-engine = create_engine(os.environ['PSQL_DB_URL'])
+engine = create_engine(os.environ['PSQL_URL'])
 
 session_maker = sessionmaker(bind=engine)
