@@ -1,10 +1,9 @@
-# from sqlalchemy.orm import declarative_base
-#
-# from app.db.postgres_db import engine
-#
-# Base = declarative_base()
-#
-# from .city_model import City
-# from .alarms_model import Alarm
-# from .alert_type_model import AlertType
-# from .area_model import Area
+from sqlalchemy.orm import declarative_base
+
+from init_data_from_kafka.app.db.postgres_db.connection import engine
+
+Base = declarative_base()
+
+from .student_profile_model import StudentProfile
+from .student_course_performance_model import StudentCoursePerformance
+from .student_lifestyle_model import StudentLifestyle
