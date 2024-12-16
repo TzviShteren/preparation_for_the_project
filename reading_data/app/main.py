@@ -1,38 +1,27 @@
 from dotenv import load_dotenv
-from kafka_settings.producer import produce
-from flask import jsonify, Flask
-import pandas as pd
-import os
+
+from reading_data.app.service.data_handlers import (
+    process_students,
+    process_lifestyle,
+    process_performance,
+    process_teachers,
+    process_classes,
+    process_relationships
+)
 
 load_dotenv(verbose=True)
-app = Flask(__name__)
 
 
-def read_data():
-    data = pd.read_csv("data/student_lifestyle.csv")
-    return data.to_json(orient="records")
+def main():
+    print("Starting batch publishing process...")
+    process_students()
+    process_lifestyle()
+    process_performance()
+    process_teachers()
+    process_classes()
+    process_relationships()
+    print("Finished publishing all data")
 
 
-@app.route('/', methods=['POST'])
-def all_messages():
-    try:
-        data = read_data()
-
-        if not data:
-            return jsonify({"error": "No data"}), 400
-
-        produce(
-            os.environ['GET_NORMALIZED_DATA_TOPIC'],
-            key='Student',
-            value=data
-        )
-
-        # data.produce_member(data)
-        return jsonify({"message": "Data send successfully"}), 201
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-
-if __name__ == '__main__':
-    app.run(port=5000)
+if __name__ == "__main__":
+    main()

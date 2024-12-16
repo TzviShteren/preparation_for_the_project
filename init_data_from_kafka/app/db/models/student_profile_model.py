@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from init_data_from_kafka.app.db.models import Base
 
+
 class StudentProfile(Base):
     __tablename__ = 'student_profile'
 
