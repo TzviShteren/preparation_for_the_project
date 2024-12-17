@@ -1,6 +1,5 @@
 from typing import List, Dict, Any
 
-
 from kafka_settings.producer import produce
 
 
