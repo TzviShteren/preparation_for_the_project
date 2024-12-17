@@ -29,6 +29,7 @@ def process_csv_data(
         transform_func: Callable[[Dict[str, Any]], Dict[str, Any]] = lambda x: x
 ):
     df = read_csv_file(file_path)
+    df.fillna(value=0, inplace=True)
     data = df.to_dict('records')
 
     for batch in create_batches(data):

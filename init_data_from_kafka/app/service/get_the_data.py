@@ -7,7 +7,6 @@ load_dotenv(verbose=True)
 
 
 def get_student():
-    print(1)
     consume(
         topic=os.environ['RAW_REVIEWS'],
         function=insert_to_elasticsearch,
